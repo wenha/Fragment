@@ -28,6 +28,8 @@ public class MainActivity extends FragmentActivity {
 
     private int position;
 
+    private Fragment mContent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,22 +69,57 @@ public class MainActivity extends FragmentActivity {
                     break;
             }
             //根据位置得到对应的Fragment
-            BaseFragment fragment = getFragment();
+            BaseFragment to = getFragment();
             //替换
-            switchFragment (fragment);
+            switchFragment (mContent,to);
         }
     }
 
-    private void switchFragment(BaseFragment fragment) {
-        //得到FragmentManager
-        FragmentManager fm = getSupportFragmentManager();
-        //开启事务
-        FragmentTransaction transaction = fm.beginTransaction();
-        //替换
-        transaction.replace(R.id.fl_content,fragment);
-        //提交事务
-        transaction.commit();
+    /**
+     *
+     * @param from 刚显示的Fragment，马上要被隐藏
+     * @param to
+     */
+    private void switchFragment(Fragment from, Fragment to) {
+        if(from != to){
+            //才切换
+            mContent = to;
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            //判断是否被添加过
+            if(!to.isAdded()){
+                //没有被添加
+                //from隐藏
+                if(from != null){
+                    ft.hide(from);
+                }
+                //添加
+                if(to!=null){
+                    ft.add(R.id.fl_content,to).commit();
+                }
+            }else {
+                //已经被添加
+                //from隐藏
+                if(from != null){
+                    ft.hide(from);
+                }
+                //显示to
+                if(to!=null){
+                    ft.show(to).commit();
+                }
+            }
+        }
     }
+
+//    private void switchFragment(BaseFragment fragment) {
+//        //得到FragmentManager
+//        FragmentManager fm = getSupportFragmentManager();
+//        //开启事务
+//        FragmentTransaction transaction = fm.beginTransaction();
+//        //替换
+//        transaction.replace(R.id.fl_content,fragment);
+//        //提交事务
+//        transaction.commit();
+//    }
 
     private BaseFragment getFragment() {
         BaseFragment fragment = myBaseFragment.get(position);

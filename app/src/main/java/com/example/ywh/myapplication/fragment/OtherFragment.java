@@ -25,7 +25,6 @@ public class OtherFragment extends BaseFragment{
         textView.setTextSize(20);
         textView.setGravity(Gravity.CENTER);
         return textView;
-
     }
 
     @Override
