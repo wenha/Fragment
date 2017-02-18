@@ -99,6 +99,6 @@ public class MainActivity extends FragmentActivity {
 
     private void initView() {
         mRg_main = (RadioGroup) findViewById(R.id.rg_main);
-        mRg_main.check(R.id.rb_common_frame);
+       // mRg_main.check(R.id.rb_common_frame);
     }
 }
