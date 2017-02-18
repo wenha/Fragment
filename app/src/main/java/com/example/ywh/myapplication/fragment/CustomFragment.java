@@ -19,7 +19,7 @@ public class CustomFragment extends BaseFragment{
 
     @Override
     protected View initView() {
-        Log.e(TAG,"常用Fragment页面被初始化。。。");
+        Log.e(TAG,"自定义Fragment页面被初始化。。。");
         textView = new TextView(mContext);
         textView.setTextColor(Color.RED);
         textView.setTextSize(20);
@@ -30,7 +30,7 @@ public class CustomFragment extends BaseFragment{
     @Override
     protected void initData() {
         super.initData();
-        Log.e(TAG,"常用框架页面被初始化了。。。");
-        textView.setText("常用框架页面");
+        Log.e(TAG,"自定义框架页面被初始化了。。。");
+        textView.setText("自定义框架页面");
     }
 }
